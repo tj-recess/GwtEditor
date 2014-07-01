@@ -1,0 +1,2 @@
+serviceClass: com.google.gwt.sample.validation.client.GreetingService
+path: B78D92A18EB5EE715F7EF36BF4C01B9D.gwt.rpc

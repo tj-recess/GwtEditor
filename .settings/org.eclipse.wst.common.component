@@ -1,0 +1,30 @@
+<project-modules id="moduleCoreId" project-version="2.0">
+  <wb-module deploy-name="Validation">
+    <property name="context-root" value="Validation"/>
+    <wb-resource deploy-path="/" source-path="src/main/webapp"/>
+    <property name="java-output-path" value="/target/Validation-1.0-SNAPSHOT/WEB-INF/classes"/>
+    <dependent-module archiveName="gwt-servlet-2.5.1.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/com/google/gwt/gwt-servlet/2.5.1/gwt-servlet-2.5.1.jar">
+      <dependency-type>uses</dependency-type>
+    </dependent-module>
+    <dependent-module archiveName="hibernate-validator-4.1.0.Final-sources.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/org/hibernate/hibernate-validator/4.1.0.Final/hibernate-validator-4.1.0.Final-sources.jar">
+      <dependency-type>uses</dependency-type>
+    </dependent-module>
+    <dependent-module archiveName="hibernate-validator-4.1.0.Final.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/org/hibernate/hibernate-validator/4.1.0.Final/hibernate-validator-4.1.0.Final.jar">
+      <dependency-type>uses</dependency-type>
+    </dependent-module>
+    <dependent-module archiveName="log4j-1.2.16.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/log4j/log4j/1.2.16/log4j-1.2.16.jar">
+      <dependency-type>uses</dependency-type>
+    </dependent-module>
+    <dependent-module archiveName="slf4j-api-1.6.1.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/org/slf4j/slf4j-api/1.6.1/slf4j-api-1.6.1.jar">
+      <dependency-type>uses</dependency-type>
+    </dependent-module>
+    <dependent-module archiveName="slf4j-log4j12-1.6.1.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/org/slf4j/slf4j-log4j12/1.6.1/slf4j-log4j12-1.6.1.jar">
+      <dependency-type>uses</dependency-type>
+    </dependent-module>
+    <dependent-module archiveName="validation-api-1.0.0.GA.jar" deploy-path="/WEB-INF/lib" handle="module:/classpath/var/M2_REPO/javax/validation/validation-api/1.0.0.GA/validation-api-1.0.0.GA.jar">
+      <dependency-type>uses</dependency-type>
+    </dependent-module>
+    <wb-resource deploy-path="/WEB-INF/classes" source-path="src/main/java"/>
+    <wb-resource deploy-path="/WEB-INF/classes" source-path="src/main/resources"/>
+  </wb-module>
+</project-modules>
