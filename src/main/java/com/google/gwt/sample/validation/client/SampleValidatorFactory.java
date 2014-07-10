@@ -16,6 +16,7 @@
 package com.google.gwt.sample.validation.client;
 
 import com.google.gwt.core.client.GWT;
+import com.google.gwt.sample.validation.shared.Address;
 import com.google.gwt.sample.validation.shared.ClientGroup;
 import com.google.gwt.sample.validation.shared.Person;
 import com.google.gwt.validation.client.GwtValidation;
@@ -30,17 +31,16 @@ import javax.validation.groups.Default;
  */
 public final class SampleValidatorFactory extends AbstractGwtValidatorFactory {
 
-  /**
-   * Validator marker for the Validation Sample project. Only the classes listed
-   * in the {@link GwtValidation} annotation can be validated.
-   */
-  @GwtValidation(value = Person.class,
-      groups = {Default.class, ClientGroup.class})
-  public interface GwtValidator extends Validator {
-  }
+    /**
+     * Validator marker for the Validation Sample project. Only the classes listed in the {@link GwtValidation}
+     * annotation can be validated.
+     */
+    @GwtValidation(value = { Person.class, Address.class }, groups = { Default.class, ClientGroup.class })
+    public interface GwtValidator extends Validator {
+    }
 
-  @Override
-  public AbstractGwtValidator createValidator() {
-    return GWT.create(GwtValidator.class);
-  }
+    @Override
+    public AbstractGwtValidator createValidator() {
+        return GWT.create(GwtValidator.class);
+    }
 }

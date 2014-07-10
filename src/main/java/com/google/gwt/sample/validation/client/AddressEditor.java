@@ -1,15 +1,16 @@
 package com.google.gwt.sample.validation.client;
 
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
 import javax.validation.ConstraintViolationException;
+import javax.validation.Validation;
+import javax.validation.Validator;
+import javax.validation.groups.Default;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.editor.client.Editor;
-import com.google.gwt.editor.client.EditorError;
-import com.google.gwt.editor.client.HasEditorErrors;
 import com.google.gwt.editor.client.SimpleBeanEditorDriver;
 import com.google.gwt.editor.ui.client.ValueBoxEditorDecorator;
 import com.google.gwt.event.dom.client.ClickEvent;
@@ -23,7 +24,7 @@ import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
-public class AddressEditor extends Composite implements Editor<Address>, HasEditorErrors<Address> {
+public class AddressEditor extends Composite implements Editor<Address> {
 
     private final Binder BINDER = GWT.create(Binder.class);
 
@@ -76,25 +77,41 @@ public class AddressEditor extends Composite implements Editor<Address>, HasEdit
     @UiHandler("save")
     void onSaveClick(ClickEvent event) {
         Address address = editorDriver.flush();
-        RPC.saveAddress(address, new AsyncCallback<String>() {
+        Set<ConstraintViolation<?>> violations = validateAddressLocally(address);
+        if (!violations.isEmpty()) {
+            editorDriver.setConstraintViolations(violations);
+        } else {
+            RPC.saveAddress(address, new AsyncCallback<String>() {
 
-            @Override
-            public void onFailure(Throwable caught) {
-                if (caught instanceof ConstraintViolationException) {
-                    Set<ConstraintViolation<?>> violations = ((ConstraintViolationException) caught)
-                        .getConstraintViolations();
-                    editorDriver.setConstraintViolations(violations);
-                    Window.alert(getErrors(violations));
-                } else {
-                    Window.alert("RPC save call failed... " + caught.getMessage());
+                @Override
+                public void onFailure(Throwable caught) {
+                    if (caught instanceof ConstraintViolationException) {
+                        // FIXME Setting constraint violations here is not displaying errors!
+                        Set<ConstraintViolation<?>> violations = ((ConstraintViolationException) caught)
+                            .getConstraintViolations();
+                        editorDriver.setConstraintViolations(violations);
+                        Window.alert(getErrors(violations));
+                    } else {
+                        Window.alert("RPC save call failed... " + caught.getMessage());
+                    }
                 }
-            }
 
-            @Override
-            public void onSuccess(String addressId) {
-                Window.alert("Saved address with ID: " + addressId);
-            }
-        });
+                @Override
+                public void onSuccess(String addressId) {
+                    Window.alert("Saved address with ID: " + addressId);
+                }
+            });
+        }
+    }
+
+    private Set<ConstraintViolation<?>> validateAddressLocally(Address address) {
+        Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
+        Set<ConstraintViolation<Address>> violations = validator.validate(address, Default.class);
+        Set<ConstraintViolation<?>> temp = new HashSet<ConstraintViolation<?>>();
+        for (ConstraintViolation<Address> violation : violations) {
+            temp.add(violation);
+        }
+        return temp;
     }
 
     private String getErrors(Set<ConstraintViolation<?>> violations) {
@@ -104,10 +121,5 @@ public class AddressEditor extends Composite implements Editor<Address>, HasEdit
             sb.append("\n");
         }
         return sb.toString();
-    }
-
-    @Override
-    public void showErrors(List<EditorError> errors) {
-        zip.showErrors(errors);
     }
 }
