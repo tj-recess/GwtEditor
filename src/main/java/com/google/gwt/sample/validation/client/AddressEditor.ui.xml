@@ -1,38 +1,41 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
-<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder" xmlns:g="urn:import:com.google.gwt.user.client.ui"
-    xmlns:e='urn:import:com.google.gwt.editor.ui.client'>
-    <ui:style>
-    
-    </ui:style>
-    <g:HTMLPanel>
-        <g:VerticalPanel width="500px">
-            <g:HorizontalPanel>
-                <g:Label>Street: </g:Label>
-                <e:ValueBoxEditorDecorator ui:field="street">
-                    <e:valuebox>
-                        <g:TextBox />
-                    </e:valuebox>
-                </e:ValueBoxEditorDecorator>
-            </g:HorizontalPanel>
-            <g:HorizontalPanel>
-                <g:Label>Zip: </g:Label>
-                <e:ValueBoxEditorDecorator ui:field="zip">
-                    <e:valuebox>
-                        <g:TextBox />
-                    </e:valuebox>
-                </e:ValueBoxEditorDecorator>
-            </g:HorizontalPanel>
-            <g:Button ui:field="save">Save Address</g:Button>
-        </g:VerticalPanel>
-        ======================================
-        <g:HorizontalPanel width="500px" height="50px">
-            <g:Label>Address ID:</g:Label>
-            <e:ValueBoxEditorDecorator ui:field="id">
-                <e:valuebox>
-                    <g:TextBox />
-                </e:valuebox>
-            </e:ValueBoxEditorDecorator>
-            <g:Button ui:field="edit">Edit Address</g:Button>
-        </g:HorizontalPanel>
-    </g:HTMLPanel>
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:e='urn:import:com.google.gwt.editor.ui.client'
+	xmlns:w='urn:import:com.google.gwt.sample.validation.client.widget'>
+	<ui:style>
+	
+	</ui:style>
+	<g:HTMLPanel>
+		<g:VerticalPanel width="500px">
+			<g:HorizontalPanel>
+				<g:Label>Street: </g:Label>
+				<w:BetterValueBoxEditorDecorator
+					ui:field="street">
+					<w:valuebox>
+						<g:TextBox />
+					</w:valuebox>
+				</w:BetterValueBoxEditorDecorator>
+			</g:HorizontalPanel>
+			<g:HorizontalPanel>
+				<g:Label>Zip: </g:Label>
+				<w:BetterValueBoxEditorDecorator
+					ui:field="zip">
+					<w:valuebox>
+						<g:TextBox />
+					</w:valuebox>
+				</w:BetterValueBoxEditorDecorator>
+			</g:HorizontalPanel>
+			<g:Button ui:field="save">Save Address</g:Button>
+		</g:VerticalPanel>
+		======================================
+		<g:HorizontalPanel width="500px" height="50px">
+			<g:Label>Address ID:</g:Label>
+			<e:ValueBoxEditorDecorator ui:field="id">
+				<e:valuebox>
+					<g:TextBox />
+				</e:valuebox>
+			</e:ValueBoxEditorDecorator>
+			<g:Button ui:field="edit">Edit Address</g:Button>
+		</g:HorizontalPanel>
+	</g:HTMLPanel>
 </ui:UiBinder> 
