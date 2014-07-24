@@ -9,6 +9,8 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.groups.Default;
 
+import com.github.gwtbootstrap.client.ui.Button;
+import com.github.gwtbootstrap.client.ui.TextBox;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.editor.client.Editor;
 import com.google.gwt.editor.client.SimpleBeanEditorDriver;
@@ -21,7 +23,6 @@ import com.google.gwt.uibinder.client.UiField;
 import com.google.gwt.uibinder.client.UiHandler;
 import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.rpc.AsyncCallback;
-import com.google.gwt.user.client.ui.Button;
 import com.google.gwt.user.client.ui.Composite;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -47,7 +48,7 @@ public class AddressEditor extends Composite implements Editor<Address> {
     @UiField
     BetterValueBoxEditorDecorator<String> street;
     @UiField
-    BetterValueBoxEditorDecorator<String> zip;
+    TextBox zip;
     @UiField
     Button save;
     @UiField

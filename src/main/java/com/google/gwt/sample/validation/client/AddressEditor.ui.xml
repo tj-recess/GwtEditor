@@ -1,41 +1,49 @@
 <!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
 <ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
-	xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:e='urn:import:com.google.gwt.editor.ui.client'
-	xmlns:w='urn:import:com.google.gwt.sample.validation.client.widget'>
-	<ui:style>
-	
-	</ui:style>
-	<g:HTMLPanel>
-		<g:VerticalPanel width="500px">
-			<g:HorizontalPanel>
-				<g:Label>Street: </g:Label>
-				<w:BetterValueBoxEditorDecorator
-					ui:field="street">
-					<w:valuebox>
-						<g:TextBox />
-					</w:valuebox>
-				</w:BetterValueBoxEditorDecorator>
-			</g:HorizontalPanel>
-			<g:HorizontalPanel>
-				<g:Label>Zip: </g:Label>
-				<w:BetterValueBoxEditorDecorator
-					ui:field="zip">
-					<w:valuebox>
-						<g:TextBox />
-					</w:valuebox>
-				</w:BetterValueBoxEditorDecorator>
-			</g:HorizontalPanel>
-			<g:Button ui:field="save">Save Address</g:Button>
-		</g:VerticalPanel>
-		======================================
-		<g:HorizontalPanel width="500px" height="50px">
-			<g:Label>Address ID:</g:Label>
-			<e:ValueBoxEditorDecorator ui:field="id">
-				<e:valuebox>
-					<g:TextBox />
-				</e:valuebox>
-			</e:ValueBoxEditorDecorator>
-			<g:Button ui:field="edit">Edit Address</g:Button>
-		</g:HorizontalPanel>
-	</g:HTMLPanel>
+  xmlns:g="urn:import:com.google.gwt.user.client.ui" xmlns:e='urn:import:com.google.gwt.editor.ui.client'
+  xmlns:w='urn:import:com.google.gwt.sample.validation.client.widget'
+  xmlns:b="urn:import:com.github.gwtbootstrap.client.ui">
+  <ui:style>
+  
+  </ui:style>
+  <g:HTMLPanel>
+    <g:VerticalPanel width="500px">
+      <g:HorizontalPanel>
+        <g:Label>Street: </g:Label>
+        <w:BetterValueBoxEditorDecorator
+          ui:field="street">
+          <w:valuebox>
+            <g:TextBox />
+          </w:valuebox>
+        </w:BetterValueBoxEditorDecorator>
+      </g:HorizontalPanel>
+      <g:HorizontalPanel>
+        <b:Form type="HORIZONTAL">
+          <b:Fieldset ui:field="controlFieldset">
+            <b:ControlGroup ui:field="zipGroup">
+              <b:ControlLabel for="zip">Zip: </b:ControlLabel>
+              <b:Controls>
+                <b:TextBox ui:field="zip" controlGroup="{zipGroup}"
+                  errorLabel="{zipErrors}"></b:TextBox>
+                <b:HelpInline ui:field="zipErrors"></b:HelpInline>
+              </b:Controls>
+            </b:ControlGroup>
+            <b:FormActions>
+              <b:Button type="INFO" ui:field="save">Save Address</b:Button>
+            </b:FormActions>
+          </b:Fieldset>
+        </b:Form>
+      </g:HorizontalPanel>
+    </g:VerticalPanel>
+    ======================================
+    <g:HorizontalPanel width="500px" height="50px">
+      <g:Label>Address ID:</g:Label>
+      <e:ValueBoxEditorDecorator ui:field="id">
+        <e:valuebox>
+          <g:TextBox />
+        </e:valuebox>
+      </e:ValueBoxEditorDecorator>
+      <b:Button type="SUCCESS" ui:field="edit">Edit Address</b:Button>
+    </g:HorizontalPanel>
+  </g:HTMLPanel>
 </ui:UiBinder> 

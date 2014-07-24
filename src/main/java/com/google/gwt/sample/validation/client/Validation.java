@@ -16,8 +16,6 @@
 package com.google.gwt.sample.validation.client;
 
 import com.google.gwt.core.client.EntryPoint;
-import com.google.gwt.core.client.GWT;
-import com.google.gwt.sample.validation.shared.Person;
 import com.google.gwt.user.client.ui.RootPanel;
 
 /**
@@ -26,17 +24,10 @@ import com.google.gwt.user.client.ui.RootPanel;
 public class Validation implements EntryPoint {
 
     /**
-     * Create a remote service proxy to talk to the server-side Greeting service.
-     */
-    private final GreetingServiceAsync greetingService = GWT.create(GreetingService.class);
-
-    /**
      * This is the entry point method.
      */
     @Override
     public void onModuleLoad() {
-        // Person person = new Person();
-        // ValidationView view = new ValidationView(person, greetingService);
         AddressEditor view = new AddressEditor();
         RootPanel.get("view").add(view);
     }
