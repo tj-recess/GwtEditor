@@ -15,7 +15,11 @@
  */
 package com.google.gwt.sample.validation.client;
 
+import org.fusesource.restygwt.client.Defaults;
+import org.fusesource.restygwt.example.client.dispatcher.DispatcherFactory;
+
 import com.google.gwt.core.client.EntryPoint;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.RootPanel;
 
 /**
@@ -28,6 +32,11 @@ public class Validation implements EntryPoint {
      */
     @Override
     public void onModuleLoad() {
+        // resty-gwt settings
+        Defaults.setDateFormat(null);
+        Defaults.setServiceRoot(GWT.getHostPageBaseURL());
+        Defaults.setDispatcher((new DispatcherFactory()).cachingDispatcher());
+
         AddressEditor view = new AddressEditor();
         RootPanel.get("view").add(view);
     }

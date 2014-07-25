@@ -9,6 +9,9 @@ import javax.validation.Validation;
 import javax.validation.Validator;
 import javax.validation.groups.Default;
 
+import org.fusesource.restygwt.client.Method;
+import org.fusesource.restygwt.client.MethodCallback;
+
 import com.github.gwtbootstrap.client.ui.Button;
 import com.github.gwtbootstrap.client.ui.TextBox;
 import com.google.gwt.core.client.GWT;
@@ -38,6 +41,7 @@ public class AddressEditor extends Composite implements Editor<Address> {
 
     private final EditorDriver editorDriver = GWT.create(EditorDriver.class);
     private final GreetingServiceAsync RPC = GWT.create(GreetingService.class);
+    private final AddressService addressServiceResty = GWT.create(AddressService.class);
 
     public AddressEditor() {
         initWidget(BINDER.createAndBindUi(this));
@@ -73,40 +77,77 @@ public class AddressEditor extends Composite implements Editor<Address> {
 
     @UiHandler("edit")
     void onEditClick(ClickEvent event) {
-        edit(id.asEditor().getValue());
+        // edit(id.asEditor().getValue());
+        editUsingRest(id.asEditor().getValue());
+    }
+
+    private void editUsingRest(String id) {
+        addressServiceResty.get(id, new MethodCallback<Address>() {
+
+            @Override
+            public void onFailure(Method method, Throwable exception) {
+                Window.alert("RPC get call failed... " + exception.getMessage());
+            }
+
+            @Override
+            public void onSuccess(Method method, Address address) {
+                editorDriver.edit(address);
+            }
+        });
     }
 
     @UiHandler("save")
     void onSaveClick(ClickEvent event) {
         Address address = editorDriver.flush();
-        Set<ConstraintViolation<?>> violations = validateAddressLocally(address);
+        Set<ConstraintViolation<?>> violations = validateAddressOnClient(address);
         if (!violations.isEmpty()) {
             editorDriver.setConstraintViolations(violations);
         } else {
-            RPC.saveAddress(address, new AsyncCallback<String>() {
-
-                @Override
-                public void onFailure(Throwable caught) {
-                    if (caught instanceof ConstraintViolationException) {
-                        // FIXME Setting constraint violations here is not displaying errors!
-                        Set<ConstraintViolation<?>> violations = ((ConstraintViolationException) caught)
-                            .getConstraintViolations();
-                        editorDriver.setConstraintViolations(violations);
-                        Window.alert(getErrors(violations));
-                    } else {
-                        Window.alert("RPC save call failed... " + caught.getMessage());
-                    }
-                }
-
-                @Override
-                public void onSuccess(String addressId) {
-                    Window.alert("Saved address with ID: " + addressId);
-                }
-            });
+            // saveUsingRpc(address);
+            saveUsingRest(address);
         }
     }
 
-    private Set<ConstraintViolation<?>> validateAddressLocally(Address address) {
+    private void saveUsingRest(Address address) {
+        addressServiceResty.save(address, new MethodCallback<Address>() {
+
+            @Override
+            public void onFailure(Method method, Throwable exception) {
+                Window.alert("REST save call failed... " + exception.getMessage());
+            }
+
+            @Override
+            public void onSuccess(Method method, Address address) {
+                Window.alert("Saved address with ID: " + address.getId());
+            }
+        });
+    }
+
+    private void saveUsingRpc(Address address) {
+        RPC.saveAddress(address, new AsyncCallback<String>() {
+
+            @Override
+            public void onFailure(Throwable caught) {
+                if (caught instanceof ConstraintViolationException) {
+                    // FIXME Setting constraint violations here is not
+                    // displaying errors!
+                    Set<ConstraintViolation<?>> violations = ((ConstraintViolationException) caught)
+                        .getConstraintViolations();
+                    editorDriver.setConstraintViolations(violations);
+                    Window.alert(getErrors(violations));
+                } else {
+                    Window.alert("RPC save call failed... " + caught.getMessage());
+                }
+            }
+
+            @Override
+            public void onSuccess(String addressId) {
+                Window.alert("Saved address with ID: " + addressId);
+            }
+        });
+    }
+
+    private Set<ConstraintViolation<?>> validateAddressOnClient(Address address) {
         Validator validator = Validation.buildDefaultValidatorFactory().getValidator();
         Set<ConstraintViolation<Address>> violations = validator.validate(address, Default.class);
         Set<ConstraintViolation<?>> temp = new HashSet<ConstraintViolation<?>>();

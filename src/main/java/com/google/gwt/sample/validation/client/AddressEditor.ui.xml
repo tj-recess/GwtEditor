@@ -18,8 +18,6 @@
         </w:BetterValueBoxEditorDecorator>
       </g:HorizontalPanel>
       <g:HorizontalPanel>
-        <b:Form type="HORIZONTAL">
-          <b:Fieldset ui:field="controlFieldset">
             <b:ControlGroup ui:field="zipGroup">
               <b:ControlLabel for="zip">Zip: </b:ControlLabel>
               <b:Controls>
@@ -28,11 +26,7 @@
                 <b:HelpInline ui:field="zipErrors"></b:HelpInline>
               </b:Controls>
             </b:ControlGroup>
-            <b:FormActions>
               <b:Button type="INFO" ui:field="save">Save Address</b:Button>
-            </b:FormActions>
-          </b:Fieldset>
-        </b:Form>
       </g:HorizontalPanel>
     </g:VerticalPanel>
     ======================================
