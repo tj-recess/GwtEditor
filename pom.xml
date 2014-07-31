@@ -114,8 +114,8 @@
       <version>2.7</version>
     </dependency>
 
-    <!-- For our json processing we want to use Jackson so we also add the 
-      following dependency -->
+    <!-- For our json processing we want to use Jackson so we also add the -->
+    <!-- following dependency -->
     <dependency>
       <groupId>org.glassfish.jersey.media</groupId>
       <artifactId>jersey-media-json-jackson</artifactId>

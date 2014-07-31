@@ -11,7 +11,6 @@ import javax.validation.groups.Default;
 
 import org.fusesource.restygwt.client.Method;
 import org.fusesource.restygwt.client.MethodCallback;
-
 import com.github.gwtbootstrap.client.ui.Button;
 import com.github.gwtbootstrap.client.ui.TextBox;
 import com.google.gwt.core.client.GWT;
@@ -118,7 +117,7 @@ public class AddressEditor extends Composite implements Editor<Address> {
 
             @Override
             public void onSuccess(Method method, Address address) {
-                Window.alert("Saved address with ID: " + address.getId());
+                Window.alert("Saved address: " + address);
             }
         });
     }

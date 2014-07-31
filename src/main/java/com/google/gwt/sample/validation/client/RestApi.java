@@ -12,20 +12,20 @@ import org.fusesource.restygwt.client.RestService;
 
 public interface RestApi<T> extends RestService {
 
-	@GET
-	@Path("own")
-	public void getForOwner(MethodCallback<T> callback);
+    @GET
+    @Path("own")
+    public void getForOwner(MethodCallback<T> callback);
 
-	@GET
-	@Path("{id}")
-	public void get(@PathParam("id") String id, MethodCallback<T> callback);
+    @GET
+    @Path("{id}")
+    public void get(@PathParam("id") String id, MethodCallback<T> callback);
 
-	@GET
-	@Path("all")
-	public void listAll(MethodCallback<List<T>> callback);
+    @GET
+    @Path("all")
+    public void listAll(MethodCallback<List<T>> callback);
 
-	@POST
-	@Path("save")
-	public void save(T obj, MethodCallback<T> callback);
+    @POST
+    @Path("save")
+    public void save(T obj, MethodCallback<T> callback);
 
 }

@@ -24,48 +24,53 @@ import javax.validation.constraints.NotNull;
  */
 public class Address implements IsSerializable {
 
-	/**
-	 * For serialization.
-	 */
-	public Address() {
-	}
+    /**
+     * For serialization.
+     */
+    public Address() {
+    }
 
-	public Address(String id, String street, String zip) {
-		this.id = id;
-		this.street = street;
-		this.zip = zip;
-	}
+    public Address(String id, String street, String zip) {
+        this.id = id;
+        this.street = street;
+        this.zip = zip;
+    }
 
-	@NotNull(message = "Invalid Street.")
-	private String street;
+    @NotNull(message = "Invalid Street.")
+    private String street;
 
-	@Zip(message = "Invalid Zip Code.")
-	private String zip;
+    @Zip(message = "Invalid Zip Code.")
+    private String zip;
 
-	private String id;
+    private String id;
 
-	public String getId() {
-		return id;
-	}
+    public String getId() {
+        return id;
+    }
 
-	public void setId(String id) {
-		this.id = id;
-	}
+    public void setId(String id) {
+        this.id = id;
+    }
 
-	public String getStreet() {
-		return street;
-	}
+    public String getStreet() {
+        return street;
+    }
 
-	public void setStreet(String street) {
-		this.street = street;
-	}
+    public void setStreet(String street) {
+        this.street = street;
+    }
 
-	public String getZip() {
-		return zip;
-	}
+    public String getZip() {
+        return zip;
+    }
 
-	public void setZip(String zip) {
-		this.zip = zip;
-	}
+    public void setZip(String zip) {
+        this.zip = zip;
+    }
+
+    @Override
+    public String toString() {
+        return "Address [street=" + street + ", zip=" + zip + ", id=" + id + "]";
+    }
 
 }

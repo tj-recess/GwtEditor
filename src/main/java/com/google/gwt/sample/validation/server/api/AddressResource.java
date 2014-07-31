@@ -4,9 +4,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import javax.inject.Singleton;
 import javax.ws.rs.Consumes;
-import javax.ws.rs.FormParam;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -16,19 +14,18 @@ import javax.ws.rs.core.MediaType;
 
 import com.google.gwt.sample.validation.shared.Address;
 
-@Singleton
 @Path("/v1/addresses")
 @Produces(MediaType.APPLICATION_JSON)
 @Consumes(MediaType.APPLICATION_JSON)
 public class AddressResource {
 
+    private final HashMap<String, Address> addressDb = new HashMap<>();
+    private final AtomicInteger nextId = new AtomicInteger(0);
+
     public AddressResource() {
         addressDb.put("1", new Address("1", "101 Ave 1", "98105"));
         addressDb.put("2", new Address("2", "202 St 2", "32608"));
     }
-
-    private final HashMap<String, Address> addressDb = new HashMap<>();
-    private final AtomicInteger nextId = new AtomicInteger(0);
 
     // example : http://127.0.0.1:8888/api/v1/addresses/all
     @GET
